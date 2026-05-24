@@ -1,0 +1,115 @@
+.layout {
+  display: flex; min-height: 100vh;
+  background: #FFF8F2;
+}
+.loading {
+  min-height: 100vh; display: flex;
+  align-items: center; justify-content: center;
+  background: #FFF8F2;
+}
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(211,84,0,.2);
+  border-top-color: #D35400;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: block;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px; flex-shrink: 0;
+  background: rgba(255,255,255,.96);
+  border-right: 1px solid rgba(211,84,0,.15);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh;
+  box-shadow: 4px 0 24px rgba(211,84,0,.06);
+  z-index: 100;
+}
+.sidebarTop { padding: 24px 20px; border-bottom: 1px solid rgba(211,84,0,.1); }
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo > span { font-size: 2rem; }
+.logoName { font-family: 'Cinzel Decorative', serif; font-size: .85rem; background: linear-gradient(135deg,#D35400,#FF6B1A); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height: 1.2; }
+.logoSub { font-size: .62rem; color: rgba(26,10,0,.4); letter-spacing: 1px; text-transform: uppercase; }
+
+.nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
+.navItem {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; border-radius: 10px;
+  border: none; background: transparent;
+  color: rgba(26,10,0,.55); font-size: .88rem; font-weight: 500;
+  text-align: left; cursor: pointer; transition: all .2s;
+  width: 100%;
+}
+.navItem:hover { background: rgba(211,84,0,.07); color: #D35400; }
+.navActive { background: rgba(211,84,0,.1) !important; color: #D35400 !important; font-weight: 700; }
+.navIcon { font-size: 1.1rem; width: 22px; text-align: center; }
+
+.sidebarBottom {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(211,84,0,.1);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.viewStore {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px;
+  color: rgba(26,10,0,.55); font-size: .84rem; font-weight: 500;
+  text-decoration: none; transition: all .2s;
+}
+.viewStore:hover { background: rgba(211,84,0,.07); color: #D35400; }
+.signOut {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px;
+  border: none; background: transparent;
+  color: rgba(220,50,50,.7); font-size: .84rem; font-weight: 500;
+  text-align: left; cursor: pointer; transition: all .2s; width: 100%;
+}
+.signOut:hover { background: rgba(220,50,50,.08); color: #DC3232; }
+
+/* MAIN */
+.main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(255,248,242,.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(211,84,0,.12);
+  padding: 16px 28px;
+  display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 2px 16px rgba(211,84,0,.07);
+}
+.menuBtn {
+  display: none;
+  background: transparent; border: 1px solid rgba(211,84,0,.2);
+  border-radius: 8px; padding: 6px 10px; font-size: 1.1rem;
+  color: #D35400; cursor: pointer; transition: all .2s;
+}
+.menuBtn:hover { background: rgba(211,84,0,.08); }
+.headerTitle { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: #1A0A00; flex: 1; }
+.userBadge {
+  display: flex; align-items: center; gap: 7px;
+  font-size: .75rem; color: rgba(26,10,0,.45);
+  background: rgba(211,84,0,.07); border: 1px solid rgba(211,84,0,.15);
+  padding: 6px 12px; border-radius: 50px;
+}
+.userDot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; box-shadow: 0 0 6px #22C55E; }
+
+.content { flex: 1; padding: 28px; overflow-y: auto; }
+
+/* Mobile overlay */
+.mobileOverlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  z-index: 99; backdrop-filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0;
+    transform: translateX(-100%);
+    transition: transform .3s cubic-bezier(.23,1,.32,1);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .menuBtn { display: flex; align-items: center; }
+  .content { padding: 18px; }
+  .userBadge { display: none; }
+}

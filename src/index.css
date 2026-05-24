@@ -1,0 +1,79 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #FFF8F2;
+  --bg2: #FFF3E8;
+  --pm: #D35400;
+  --pmid: #E8621A;
+  --pl: #F08040;
+  --neon: #C84B00;
+  --mag: #FF6B1A;
+  --wh: #1A0A00;
+  --gl: rgba(211,84,0,.07);
+  --glb: rgba(211,84,0,.22);
+  --fd: 'Cinzel Decorative', serif;
+  --fh: 'Cinzel', serif;
+  --fb: 'Outfit', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--wh); font-family: var(--fb); overflow-x: hidden; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #FFF3E8; }
+::-webkit-scrollbar-thumb { background: var(--pmid); border-radius: 3px; }
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--fb); }
+input, textarea, select { font-family: var(--fb); }
+
+.grad-text {
+  background: linear-gradient(135deg, #7C2A00 0%, #D35400 38%, #E8621A 68%, #FF8C00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #C84B00, #D35400, #E8621A);
+  border: none;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 0 24px rgba(200,75,0,.35);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 44px rgba(200,75,0,.6); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--glb);
+  color: var(--wh);
+  padding: 11px 26px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--neon); box-shadow: 0 0 28px rgba(211,84,0,.35); transform: translateY(-2px); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-18px) rotate(4deg); }
+}
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

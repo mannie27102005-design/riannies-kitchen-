@@ -1,0 +1,50 @@
+.page { max-width: 800px; }
+.loading { display:flex;align-items:center;justify-content:center;padding:80px; }
+.spinner { width:36px;height:36px;border:3px solid rgba(211,84,0,.2);border-top-color:#D35400;border-radius:50%;animation:spin .7s linear infinite;display:block; }
+.spinner2 { width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;display:inline-block; }
+@keyframes spin { to{transform:rotate(360deg);} }
+
+.section { background:rgba(255,255,255,.9);border:1px solid rgba(211,84,0,.12);border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(211,84,0,.06);margin-bottom:20px; }
+.sectionTitle { font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:#1A0A00;margin-bottom:6px; }
+.sectionDesc { font-size:.82rem;color:rgba(26,10,0,.45);margin-bottom:20px;line-height:1.6; }
+
+.formGrid { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+.fg { display:flex;flex-direction:column;gap:6px; }
+.fl { font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:#D35400;font-family:'Cinzel',serif; }
+.fi { background:rgba(211,84,0,.04);border:1px solid rgba(211,84,0,.2);color:#1A0A00;padding:11px 14px;border-radius:10px;font-size:.9rem;outline:none;transition:all .3s; }
+.fi:focus { border-color:#D35400;box-shadow:0 0 14px rgba(211,84,0,.15); }
+.fi::placeholder { color:rgba(26,10,0,.3); }
+.hint { font-size:.7rem;color:rgba(26,10,0,.35); }
+
+.toggleRow { display:flex;flex-direction:column;gap:12px; }
+.toggleItem { display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(211,84,0,.04);border:1px solid rgba(211,84,0,.1);border-radius:12px;padding:14px 18px; }
+.toggleLabel { font-weight:600;font-size:.9rem;color:#1A0A00;margin-bottom:3px; }
+.toggleDesc { font-size:.76rem;color:rgba(26,10,0,.45); }
+.toggle { position:relative;width:44px;height:24px;display:inline-block;cursor:pointer;flex-shrink:0; }
+.toggle input { opacity:0;width:0;height:0; }
+.toggleSlider { position:absolute;inset:0;background:rgba(26,10,0,.18);border-radius:12px;transition:.3s; }
+.toggleSlider::before { content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;left:3px;top:3px;transition:.3s; }
+input:checked + .toggleSlider { background:linear-gradient(135deg,#D35400,#FF6B1A); }
+input:checked + .toggleSlider::before { transform:translateX(20px); }
+
+.saveBtn { background:linear-gradient(135deg,#C84B00,#D35400,#E8621A);border:none;color:#fff;padding:13px 30px;border-radius:12px;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .3s;box-shadow:0 0 22px rgba(200,75,0,.3);display:inline-flex;align-items:center;gap:8px; }
+.saveBtn:hover { transform:translateY(-2px);box-shadow:0 0 38px rgba(200,75,0,.5); }
+.saveBtn:disabled { opacity:.5;cursor:not-allowed;transform:none; }
+.pwBtn { background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:#1D4ED8;padding:11px 22px;border-radius:10px;font-weight:700;font-size:.88rem;cursor:pointer;transition:all .2s;margin-top:14px;display:inline-flex;align-items:center;gap:8px; }
+.pwBtn:hover { background:rgba(59,130,246,.18); }
+.pwBtn:disabled { opacity:.5;cursor:not-allowed; }
+
+/* Guide */
+.guide { display:flex;flex-direction:column;gap:20px; }
+.guideStep { display:flex;gap:16px;align-items:flex-start; }
+.guideNum { width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D35400,#FF6B1A);color:#fff;font-weight:800;font-size:.88rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px; }
+.guideStep strong { display:block;font-size:.92rem;color:#1A0A00;margin-bottom:5px; }
+.guideStep p { font-size:.82rem;color:rgba(26,10,0,.55);line-height:1.7; }
+.guideStep a { color:#D35400;text-decoration:none; }
+.guideStep a:hover { text-decoration:underline; }
+.guideStep code { background:rgba(211,84,0,.1);color:#D35400;padding:1px 6px;border-radius:4px;font-size:.8rem; }
+.code { background:#1A0A00;color:#FFD580;padding:12px 16px;border-radius:10px;font-size:.8rem;line-height:1.8;margin-top:10px;overflow-x:auto;white-space:pre; }
+
+@media(max-width:640px) {
+  .formGrid { grid-template-columns:1fr; }
+}

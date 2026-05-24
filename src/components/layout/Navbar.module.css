@@ -1,0 +1,99 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 44px;
+  background: rgba(255,248,242,.88);
+  backdrop-filter: blur(22px);
+  border-bottom: 1px solid rgba(211,84,0,.22);
+  transition: all .3s;
+}
+.scrolled {
+  padding: 12px 44px;
+  background: rgba(255,248,242,.97);
+  box-shadow: 0 4px 40px rgba(211,84,0,.15);
+}
+.logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #D35400, #E8621A, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hours {
+  font-size: .72rem;
+  color: #C84B00;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: .85;
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+  animation: blink 1.6s infinite;
+  display: inline-block;
+}
+@keyframes blink { 50% { opacity: .2; } }
+
+.cartBtn {
+  position: relative;
+  background: linear-gradient(135deg, #D35400, #FF6B1A);
+  border: none;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: .88rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .3s;
+  box-shadow: 0 0 22px rgba(211,84,0,.3);
+}
+.cartBtn:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(211,84,0,.5); }
+
+.badge {
+  position: absolute;
+  top: -7px; right: -7px;
+  background: #1A0A00;
+  color: #fff;
+  width: 21px; height: 21px;
+  border-radius: 50%;
+  font-size: .68rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.backBtn {
+  background: transparent;
+  border: 1px solid rgba(211,84,0,.3);
+  color: #D35400;
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: .82rem;
+  font-weight: 600;
+  transition: all .2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.backBtn:hover { background: rgba(211,84,0,.08); border-color: #D35400; }
+
+@media (max-width: 768px) {
+  .nav, .scrolled { padding: 13px 18px; }
+  .hours { display: none; }
+}

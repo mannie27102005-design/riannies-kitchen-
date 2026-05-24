@@ -1,0 +1,31 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,243,232,.9);
+  border-top: 1px solid rgba(211,84,0,.18);
+  padding: 42px;
+  text-align: center;
+}
+.logo {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.45rem;
+  background: linear-gradient(135deg, #D35400, #FF6B1A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
+}
+.info {
+  font-size: .78rem;
+  color: rgba(26,10,0,.45);
+  line-height: 2.1;
+}
+.adminLink {
+  font-size: .68rem;
+  color: rgba(26,10,0,.13);
+  margin-top: 18px;
+  display: inline-block;
+  transition: color .3s;
+}
+.adminLink:hover { color: #D35400; }
+@media (max-width: 768px) { .footer { padding: 30px 18px; } }
