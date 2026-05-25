@@ -14,18 +14,26 @@ export default function AdminSettings() {
   const [savingPw, setSavingPw] = useState(false)
 
   useEffect(() => {
-    if (!loading) setForm({ ...config })
+    if (!loading && config) setForm({ ...config })
   }, [config, loading])
 
   const handleSave = async () => {
     setSaving(true)
-    const updates = Object.entries(form).map(([key, value]) =>
-      supabase.from('store_config').upsert({ key, value, updated_at: new Date().toISOString() })
-    )
-    const results = await Promise.all(updates)
-    const err = results.find(r => r.error)
-    if (err) toast.error(err.error.message)
-    else { toast.success('Settings saved!'); refetch() }
+    try {
+      const updates = Object.entries(form).map(([key, value]) =>
+        supabase.from('store_config').upsert({ key, value, updated_at: new Date().toISOString() })
+      )
+      const results = await Promise.all(updates)
+      const err = results.find(r => r.error)
+      if (err) {
+        toast.error('Save failed: ' + err.error.message)
+      } else {
+        toast.success('✅ Settings saved!')
+        refetch()
+      }
+    } catch (err) {
+      toast.error('Error: ' + err.message)
+    }
     setSaving(false)
   }
 
@@ -36,7 +44,7 @@ export default function AdminSettings() {
     setSavingPw(true)
     const { error } = await supabase.auth.updateUser({ password: pwForm.newPassword })
     if (error) toast.error(error.message)
-    else { toast.success('Password updated!'); setPwForm({ newPassword: '', confirm: '' }) }
+    else { toast.success('✅ Password updated!'); setPwForm({ newPassword: '', confirm: '' }) }
     setSavingPw(false)
   }
 
@@ -44,7 +52,6 @@ export default function AdminSettings() {
 
   return (
     <div className={styles.page}>
-      {/* Store Info */}
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>🏪 Store Information</h2>
         <p className={styles.sectionDesc}>This info appears in the footer and order messages.</p>
@@ -69,7 +76,6 @@ export default function AdminSettings() {
         </div>
       </div>
 
-      {/* Store Status */}
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>⚡ Store Status</h2>
         <p className={styles.sectionDesc}>Control what customers can see and do on the store.</p>
@@ -101,7 +107,6 @@ export default function AdminSettings() {
         {saving ? <span className={styles.spinner2} /> : '💾 Save All Settings'}
       </button>
 
-      {/* Password */}
       <div className={styles.section} style={{ marginTop: 32 }}>
         <h2 className={styles.sectionTitle}>🔐 Change Password</h2>
         <p className={styles.sectionDesc}>Signed in as <strong>{user?.email}</strong></p>
@@ -118,56 +123,6 @@ export default function AdminSettings() {
         <button className={styles.pwBtn} onClick={handlePasswordChange} disabled={savingPw}>
           {savingPw ? <span className={styles.spinner2} /> : '🔑 Update Password'}
         </button>
-      </div>
-
-      {/* Supabase Setup Guide */}
-      <div className={styles.section} style={{ marginTop: 32 }}>
-        <h2 className={styles.sectionTitle}>📖 Supabase Setup Guide</h2>
-        <div className={styles.guide}>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>1</span>
-            <div>
-              <strong>Create a Supabase project</strong>
-              <p>Go to <a href="https://supabase.com" target="_blank" rel="noreferrer">supabase.com</a> → New Project. Choose a name, database password, and region closest to Nigeria (eu-west or us-east).</p>
-            </div>
-          </div>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>2</span>
-            <div>
-              <strong>Run the SQL schema</strong>
-              <p>In your Supabase dashboard → SQL Editor → paste the contents of <code>supabase_schema.sql</code> (included in the zip) and click Run. This creates all tables, seed data, and security policies.</p>
-            </div>
-          </div>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>3</span>
-            <div>
-              <strong>Create a Storage bucket</strong>
-              <p>Go to Storage → New bucket → name it <code>menu-images</code> → set it to <strong>Public</strong>. This lets you upload food photos from the admin panel.</p>
-            </div>
-          </div>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>4</span>
-            <div>
-              <strong>Create your admin user</strong>
-              <p>Go to Authentication → Users → Invite User (or Add User) → enter your email and a strong password. This is the login for this admin dashboard.</p>
-            </div>
-          </div>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>5</span>
-            <div>
-              <strong>Add your API keys to .env</strong>
-              <p>Go to Settings → API → copy <strong>Project URL</strong> and <strong>anon public key</strong>. Create a <code>.env</code> file in the project root:</p>
-              <pre className={styles.code}>{`VITE_SUPABASE_URL=https://xxxx.supabase.co\nVITE_SUPABASE_ANON_KEY=eyJhbGci...`}</pre>
-            </div>
-          </div>
-          <div className={styles.guideStep}>
-            <span className={styles.guideNum}>6</span>
-            <div>
-              <strong>Run the app</strong>
-              <p>In your terminal: <code>npm install</code> then <code>npm run dev</code>. Visit <code>http://localhost:5173</code> to see the store, and <code>/admin</code> to log in.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )
